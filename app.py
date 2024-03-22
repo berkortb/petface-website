@@ -3,6 +3,7 @@ from PIL import Image
 import requests
 from dotenv import load_dotenv
 import os
+import random
 
 # Set page tab display
 st.set_page_config(
@@ -16,17 +17,17 @@ st.set_page_config(
 # url = 'http://api:8000'
 # Example localhost development URL
 # url = 'http://localhost:8000'
-load_dotenv()
-url = os.getenv('API_URL')
+#load_dotenv()
+#url = os.getenv('API_URL')
 
 
 # App title and description
 st.header('Pet Face Expression Recognition 🐾')
 st.markdown('''
             > Welcome to the Pet Face Expression Recognition tool!
-            >Upload a photo of your pet, and let's try to understand their mood.
+            > Upload a photo of your pet, and let's try to understand their mood.
 
-            > **What you have to do:
+            > * What you have to do:
 
             > * Upload a photo of your pet.
             > * We will guess the mood of your pet!
@@ -39,9 +40,26 @@ st.markdown("---")
 st.markdown("### Upload your pet's photo")
 img_file_buffer = st.file_uploader('Upload an image')
 
-def process_image(image_bytes):
-    return "Happy"
+mood_explanations = {
+    "Happy" : {
+        "description": "Ears are relaxed, a soft gaze, and a wagging tail are the ways of their way of smiling",
+        "fact": "Dogs wag their tails more to the right when they are happy 🐶"
+    },
+    "Sad": {
+        "description": "Decreased activity, avoiding interaction and hiding.",
+        "fact": "Elephants mourn and visit the bones of their dead members in the herd 🐘"
+    },
+    "Angry": {
+        "description": "Showing teeth, growling, focused eyes. Avoid touch and sudden movements",
+        "fact": "Tail movement is a clear indication to back off 🐍"
+    }
+}
 
+def process_image(image_bytes):
+    mood = random.choice(list(mood_explanations.keys()))
+    description = mood_explanations[mood]["description"]
+    fact = mood_explanations[mood]["fact"]
+    return mood, description, fact
 
 if img_file_buffer is not None:
 
@@ -53,8 +71,10 @@ if img_file_buffer is not None:
 
   with col2:
     with st.spinner("Analyzing the mood..."):
-      mood = process_image(img_file_buffer.getvalue())
+      mood, description, fact = process_image(img_file_buffer.getvalue())
       st.markdown(f"**Mood: {mood}!**")
+      st.markdown(f"*{description}*")
+      st.markdown(f"*Fun Fact:* {fact}")
 
       '''
       ### Get bytes from the file buffer
