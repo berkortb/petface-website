@@ -10,15 +10,15 @@ animals = [
 
 mood_explanations = {
     "Happy": {
-        "description": "Ears are relaxed, a soft gaze, and a wagging tail are the ways of their way of smiling",
-        "fact": "Dogs wag their tails more to the right when they are happy 🐶",
+        "description": "Ears are relaxed, a soft gaze, and a wagging tail are the ways of their way of smiling.",
+        "fact": "Is that the sound of a can 🦴",
     },
     "Sad": {
         "description": "Decreased activity, avoiding interaction and hiding.",
-        "fact": "Elephants mourn and visit the bones of their dead members in the herd 🐘",
+        "fact": "Need some therapy! 😿",
     },
     "Angry": {
-        "description": "Showing teeth, growling, focused eyes. Avoid touch and sudden movements",
-        "fact": "Tail movement is a clear indication to back off 🐍",
+        "description": "Showing teeth, growling, focused eyes. Avoid touch and sudden movements.",
+        "fact": "Back off hooman 🐍",
     },
 }
