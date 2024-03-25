@@ -22,8 +22,8 @@ st.markdown(
             > **What you have to do:**
 
             > * Upload a photo of your pet.
-            > * We will guess the mood of your pet!
-            > * Try other animals. Even a chicken can show happiness 🐣
+            > * We will guess the mood and species of your pet!
+            > * Try other animals. Even a chicken can show emotions. 🐣
             """
 )
 
@@ -48,19 +48,6 @@ for chunk in animals_chunks:
 st.markdown("### Upload your pet's photo")
 
 img_file_buffer = st.file_uploader("Upload an image", type=["jpg", "jpeg", "png"])
-# if img_file_buffer is not None:
-
-#     col1, col2 = st.columns(2)
-
-#     with col1:
-#         st.image(Image.open(img_file_buffer), caption="Here's the image you uploaded")
-
-#     with col2:
-#         with st.spinner("Analyzing the mood..."):
-#             mood, description, fact = predict_emotion(img_file_buffer.getvalue())
-#             st.markdown(f"**Mood: {mood}!**")
-#             st.markdown(f"*{description}*")
-#             st.markdown(f"*{fact}*")
 
 if img_file_buffer is not None:
     col1, col2 = st.columns(2)
@@ -71,33 +58,27 @@ if img_file_buffer is not None:
     # Initialize an empty container for status messages
     status_message = st.empty()
 
-    # Initialize progress bar
     progress = st.progress(0)
 
-    # Loading model simulation
     status_message.text('Waking up the pet psychics from their catnaps...')
     progress.progress(25)
-    time.sleep(2)  # Simulating a delay
+    time.sleep(2)
 
-    # Analyzing image simulation
     status_message.text("Decrypting tail wags and whisker twitches...")
     progress.progress(50)
-    time.sleep(2)  # Simulating analysis delay
+    time.sleep(2)
 
-    # Almost done simulation
     status_message.text('Translating into hooman language...')
     progress.progress(75)
-    time.sleep(2)  # Simulating wrapping up processing
+    time.sleep(2)
 
-    # Predict emotion from the image
+    #Call prediction
     mood, description, fact = predict_emotion(img_file_buffer.getvalue())
 
-    # Update UI with the prediction result
     status_message.text('Voilà! Here’s what your pet is saying.')
     progress.progress(100)
-    time.sleep(1)  # Short pause to let user acknowledge completion
+    time.sleep(1)
 
-    # Clear the status message and progress bar
     status_message.empty()
     progress.empty()
 
