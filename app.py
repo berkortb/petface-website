@@ -83,9 +83,15 @@ st.markdown("### Upload your pet's photo")
 img_file_buffer = st.file_uploader('Upload an image')
 
 def process_image(image_bytes):
-    mood = random.choice(list(mood_explanations.keys()))
-    description = mood_explanations[mood]["description"]
-    fact = mood_explanations[mood]["fact"]
+    api_url = "https://petface-chgqr6jdlq-ew.a.run.app/predict/"
+    files = {'file': image_bytes}
+
+    response = requests.post(api_url, files=files)
+    response_json = response.json()
+    mood = response_json.get('prediction')
+    description = mood_explanations.get(mood, {}).get("description")
+    fact = mood_explanations.get(mood, {}).get("fact")
+
     return mood, description, fact
 
 if img_file_buffer is not None:
@@ -101,21 +107,21 @@ if img_file_buffer is not None:
       mood, description, fact = process_image(img_file_buffer.getvalue())
       st.markdown(f"**Mood: {mood}!**")
       st.markdown(f"*{description}*")
-      st.markdown(f"*Random Fact:* {fact}")
+      st.markdown(f"**Random Fact:** {fact}")
 
-      '''
-      ### Get bytes from the file buffer
-      img_bytes = img_file_buffer.getvalue()
+    #   '''
+    #   ### Get bytes from the file buffer
+    #   img_bytes = img_file_buffer.getvalue()
 
-      ### Make request to  API (stream=True to stream response as bytes)
-      res = requests.post(url + "/upload_image", files={'img': img_bytes})
+    #   ### Make request to  API (stream=True to stream response as bytes)
+    #   res = requests.post(url + "/upload_image", files={'img': img_bytes})
 
-      if res.status_code == 200:
-        ### Display the image returned by the API
-        st.image(res.content, caption="Image returned from API ☝️")
-      else:
-        st.markdown("**Oops**, something went wrong 😓 Please try again.")
-        print(res.status_code, res.content)
+    #   if res.status_code == 200:
+    #     ### Display the image returned by the API
+    #     st.image(res.content, caption="Image returned from API ☝️")
+    #   else:
+    #     st.markdown("**Oops**, something went wrong 😓 Please try again.")
+    #     print(res.status_code, res.content)
 
-        '''
+    #     '''
 #images from freepik
