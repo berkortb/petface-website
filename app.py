@@ -1,5 +1,6 @@
 import streamlit as st
 from PIL import Image
+import time
 
 from utils.params import animals
 from api.predict import predict_emotion
@@ -47,16 +48,60 @@ for chunk in animals_chunks:
 st.markdown("### Upload your pet's photo")
 
 img_file_buffer = st.file_uploader("Upload an image", type=["jpg", "jpeg", "png"])
-if img_file_buffer is not None:
+# if img_file_buffer is not None:
 
+#     col1, col2 = st.columns(2)
+
+#     with col1:
+#         st.image(Image.open(img_file_buffer), caption="Here's the image you uploaded")
+
+#     with col2:
+#         with st.spinner("Analyzing the mood..."):
+#             mood, description, fact = predict_emotion(img_file_buffer.getvalue())
+#             st.markdown(f"**Mood: {mood}!**")
+#             st.markdown(f"*{description}*")
+#             st.markdown(f"*{fact}*")
+
+if img_file_buffer is not None:
     col1, col2 = st.columns(2)
 
     with col1:
-        st.image(Image.open(img_file_buffer), caption="Here's the image you uploaded")
+        st.image(Image.open(img_file_buffer), caption="Here's the majestic creature")
+
+    # Initialize an empty container for status messages
+    status_message = st.empty()
+
+    # Initialize progress bar
+    progress = st.progress(0)
+
+    # Loading model simulation
+    status_message.text('Waking up the pet psychics from their catnaps...')
+    progress.progress(25)
+    time.sleep(2)  # Simulating a delay
+
+    # Analyzing image simulation
+    status_message.text("Decrypting tail wags and whisker twitches...")
+    progress.progress(50)
+    time.sleep(2)  # Simulating analysis delay
+
+    # Almost done simulation
+    status_message.text('Translating into hooman language...')
+    progress.progress(75)
+    time.sleep(2)  # Simulating wrapping up processing
+
+    # Predict emotion from the image
+    mood, description, fact = predict_emotion(img_file_buffer.getvalue())
+
+    # Update UI with the prediction result
+    status_message.text('Voilà! Here’s what your pet is saying.')
+    progress.progress(100)
+    time.sleep(1)  # Short pause to let user acknowledge completion
+
+    # Clear the status message and progress bar
+    status_message.empty()
+    progress.empty()
 
     with col2:
-        with st.spinner("Analyzing the mood..."):
-            mood, description, fact = predict_emotion(img_file_buffer.getvalue())
-            st.markdown(f"**Mood: {mood}!**")
-            st.markdown(f"*{description}*")
-            st.markdown(f"**Random Fact:** {fact}")
+        st.markdown(f"**Mood: {mood}!**")
+        st.markdown(f"*{fact}*")
+        st.markdown(f"**Signs:** *{description}*")
