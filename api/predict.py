@@ -10,7 +10,7 @@ def predict_emotion(image_bytes):
     response_json = response.json()
     print(response.status_code)
     print(response.json())
-    mood = response_json.get("prediction")
+    mood = response_json.get("prediction").capitalize()
     description = mood_explanations.get(mood, {}).get("description")
     fact = mood_explanations.get(mood, {}).get("fact")
 

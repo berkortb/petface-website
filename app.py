@@ -11,7 +11,6 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
-
 # App title and description
 st.header("🐾Pet Face Expression Recognition 🐾")
 st.markdown(
@@ -26,7 +25,6 @@ st.markdown(
             > * Try other animals. Even a chicken can show happiness 🐣
             """
 )
-
 
 def display_animal_row(animals_row):
     cols_img = st.columns(7)
@@ -45,19 +43,6 @@ animals_chunks = [animals[x : x + 7] for x in range(0, len(animals), 7)]
 
 for chunk in animals_chunks:
     display_animal_row(chunk)
-
-
-# def process_image(image_bytes):
-#     api_url = "https://petface-chgqr6jdlq-ew.a.run.app/predict/"
-#     files = {"file": image_bytes}
-
-#     response = requests.post(api_url, files=files)
-#     response_json = response.json()
-#     mood = response_json.get("prediction")
-#     description = mood_explanations.get(mood, {}).get("description")
-#     fact = mood_explanations.get(mood, {}).get("fact")
-
-#     return mood, description, fact
 
 st.markdown("### Upload your pet's photo")
 
