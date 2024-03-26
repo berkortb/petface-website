@@ -21,4 +21,8 @@ mood_explanations = {
         "description": "Showing teeth, growling, focused eyes. Avoid touch and sudden movements.",
         "fact": "Back off hooman 🐍",
     },
+    "Other": {
+        "description": "Looking at a spot on the wall but will you never know why 👻",
+        "fact": "Discovering the meaning of life 🦦",
+    },
 }

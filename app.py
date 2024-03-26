@@ -51,14 +51,12 @@ img_file_buffer = st.file_uploader("Upload an image", type=["jpg", "jpeg", "png"
 
 if img_file_buffer is not None:
     col1, col2 = st.columns(2)
-
     with col1:
         st.image(Image.open(img_file_buffer), caption="Here's the majestic creature")
-
     # Initialize an empty container for status messages
-    status_message = st.empty()
-
-    progress = st.progress(0)
+    with col2:
+        status_message = st.empty()
+        progress = st.progress(0)
 
     status_message.text('Waking up the pet psychics from their catnaps...')
     progress.progress(25)
@@ -73,7 +71,7 @@ if img_file_buffer is not None:
     time.sleep(2)
 
     #Call prediction
-    mood, description, fact = predict_emotion(img_file_buffer.getvalue())
+    mood, classification, description, fact = predict_emotion(img_file_buffer.getvalue())
 
     status_message.text('Voilà! Here’s what your pet is saying.')
     progress.progress(100)
@@ -83,6 +81,7 @@ if img_file_buffer is not None:
     progress.empty()
 
     with col2:
-        st.markdown(f"**Mood: {mood}!**")
-        st.markdown(f"*{fact}*")
+        #To edit the type of output of classification
+        animal_type = classification.split("a photo of a ")[-1].capitalize()
+        st.markdown(f"**Mood: {mood} {animal_type}!** *{fact}*")
         st.markdown(f"**Signs:** *{description}*")
