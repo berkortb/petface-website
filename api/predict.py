@@ -11,7 +11,8 @@ def predict_emotion(image_bytes):
     print(response.status_code)
     print(response.json())
     mood = response_json.get("prediction").capitalize()
+    classification = response_json.get("classification")
     description = mood_explanations.get(mood, {}).get("description")
     fact = mood_explanations.get(mood, {}).get("fact")
 
-    return mood, description, fact
+    return mood, classification, description, fact,
