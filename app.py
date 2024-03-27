@@ -60,15 +60,15 @@ if img_file_buffer is not None:
 
     status_message.text('Waking up the pet psychics from their catnaps...')
     progress.progress(25)
-    time.sleep(2)
+    time.sleep(1)
 
     status_message.text("Decrypting tail wags and whisker twitches...")
     progress.progress(50)
-    time.sleep(2)
+    time.sleep(1)
 
     status_message.text('Translating into hooman language...')
     progress.progress(75)
-    time.sleep(2)
+    time.sleep(1)
 
     #Call prediction
     mood, classification, description, fact = predict_emotion(img_file_buffer.getvalue())
