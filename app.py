@@ -22,8 +22,8 @@ st.markdown(
             > **What you have to do:**
 
             > * Upload a photo of your pet.
-            > * We will guess the mood and species of your pet!
-            > * Try other animals. Even a chicken can show emotions. 🐣
+            > * We will guess the mood and species of your pet! Angry, Happy, Sad or Other...
+            > * Try other animals. Even a sheep can show emotions. 🐑
             """
 )
 
@@ -71,7 +71,7 @@ if img_file_buffer is not None:
     time.sleep(1)
 
     #Call prediction
-    mood, classification, description, fact = predict_emotion(img_file_buffer.getvalue())
+    primary_mood, secondary_mood, classification, description, fact = predict_emotion(img_file_buffer.getvalue())
 
     status_message.text('Voilà! Here’s what your pet is saying.')
     progress.progress(100)
@@ -83,5 +83,11 @@ if img_file_buffer is not None:
     with col2:
         #To edit the type of output of classification
         animal_type = classification.split("a photo of a ")[-1].capitalize()
-        st.markdown(f"**Mood: {mood} {animal_type}!** *{fact}*")
+        st.markdown(f"**Mood: {primary_mood} {animal_type}!** *{fact}*")
         st.markdown(f"**Signs:** *{description}*")
+        if secondary_mood:
+            if secondary_mood == "other":
+                st.markdown("**Second Opinion:** It is possible that your pet can be in another mood that is not in our range of moods yet. This opinion is based on a close accuracy difference.")
+            else:
+                # For any secondary mood other than "Other", display it normally
+                st.markdown(f"**Second Opinion: {secondary_mood} {animal_type}!** This opinion is based on a close accuracy difference.")
