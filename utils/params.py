@@ -10,15 +10,15 @@ animals = [
 
 mood_explanations = {
     "Happy": {
-        "description": "Ears are relaxed, a soft gaze, and a wagging tail are the ways of their way of smiling.",
-        "fact": "Is that the sound of a can 🦴",
+        "description": "Relaxed posture, gentle eyes, and playful movements are signs of joy across many species.",
+        "fact": "Did someone say treat? 🥕🍎🦴",
     },
     "Sad": {
-        "description": "Decreased activity, avoiding interaction and hiding.",
-        "fact": "Need some therapy! 😿",
+        "description": "Decreased activity, avoiding interaction.",
+        "fact": "Need some therapy!",
     },
     "Angry": {
-        "description": "Showing teeth, growling, focused eyes. Avoid touch and sudden movements.",
+        "description": "Signs of discomfort or aggression can vary widely. Baring teeth, hissing or growling, intense staring, or sudden movements.",
         "fact": "Back off hooman 🐍",
     },
     "Other": {
